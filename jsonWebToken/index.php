@@ -1,6 +1,19 @@
 <?php
 require 'vendor/autoload.php';
+require 'app/lib/Auth.php';
 
-use Firebase\JWT\JWT;
+use App\Lib\Auth;
 
-print_r(JWT);
+$data = [
+    'id' => 1,
+    'name' => 'Eduardo'
+];
+
+$token = Auth::SignIn($data);
+
+try {
+    Auth::Check(null);
+    echo 'ok';
+} catch (\Exception $e) {
+    print_r($e->getMessage());
+}
